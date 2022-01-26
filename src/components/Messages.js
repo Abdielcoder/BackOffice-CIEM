@@ -1,6 +1,17 @@
 import React from 'react'
+import MessagesForm from './MessagesForm';
+import {db} from '../firebase'
 
-export const Messages = ()=>{
-    return <h1>Messages</h1>
+
+ const Messages = ()=>{
+
+    const addTask = () => {
+        console.log('new task');
+    }
+
+    return <div>
+        <MessagesForm addOrEdit={addTask}/>
+        <h1>Messages</h1>
+    </div>
 }
 export default Messages;
