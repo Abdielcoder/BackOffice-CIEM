@@ -24,8 +24,9 @@ export const MessagesForm = (props)=>{
     const handlesSubmit = e => {
         //e.preventDefault ELIMINATE REFRESHING PAGE
         e.preventDefault();
-        console.log(values);
-        props.addOrEdit();
+        //FUNTION SAVE EDIT
+        props.addOrEditMessages(values);
+        setValues({...initialStateValues})
     }
 
     return (
@@ -36,14 +37,15 @@ export const MessagesForm = (props)=>{
             </div>
         
         <input type="text" className='form-control' placeholder='Asunto:' name='asunto'
-         onChange={handleInputState}/>
+         onChange={handleInputState} value={values.asunto}/>
         </div>
         <div className="form-group input-group">
             <div className="input-group-text bg-light">
                 <i className="material-icons">message</i>
             </div>
     
-        <input type="text" className='form-control' placeholder='Mensaje:' name='mensaje' onChange={handleInputState}/>
+        <input type="text" className='form-control' placeholder='Mensaje:' name='mensaje' onChange={handleInputState}
+        value={values.mensaje}/>
        </div>
        <button className='btn btn-info btn-block'>
            Enviar
