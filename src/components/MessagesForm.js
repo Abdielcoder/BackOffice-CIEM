@@ -1,4 +1,5 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
+import { db } from '../firebase';
 
 export const MessagesForm = (props)=>{
     const handleInputState = e => {
@@ -8,9 +9,26 @@ export const MessagesForm = (props)=>{
         //console.log(name,value);
         //ADDING VALUES TO STATE
         setValues({...values,[name]: value});
-       
-        
+             
     }
+
+    const getMessagesById = async (id) => {
+        const doc = await db.collection('Messages').doc(id).get();
+        //COPY TO INPUTS
+        console.log(doc.data())
+        setValues({...doc.data()});
+    }
+
+    useEffect(()=>{
+        if(props.currentId === ''){
+            //VALUES EMPTY
+            setValues({ ...initialStateValues });
+        }else{
+            getMessagesById(props.currentId);
+        }
+        
+    },[props.currentId]);
+
     const initialStateValues = {
         asunto: '',
         mensaje: ''
@@ -48,7 +66,7 @@ export const MessagesForm = (props)=>{
         value={values.mensaje}/>
        </div>
        <button className='btn btn-info btn-block'>
-           Enviar
+          {props.currentId === ''? 'Enviar': 'Actualizar'}
        </button>
     </form>
     );
