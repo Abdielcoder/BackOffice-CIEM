@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { db } from '../firebase';
+import {Navbar} from 'react-bootstrap'
 
 export const MessagesForm = (props)=>{
     const handleInputState = e => {
@@ -12,7 +13,7 @@ export const MessagesForm = (props)=>{
              
     }
 
-    const getMessagesById = async (id) => {
+    const getMessageById = async (id) => {
         const doc = await db.collection('Messages').doc(id).get();
         //COPY TO INPUTS
         console.log(doc.data())
@@ -24,7 +25,7 @@ export const MessagesForm = (props)=>{
             //VALUES EMPTY
             setValues({ ...initialStateValues });
         }else{
-            getMessagesById(props.currentId);
+            getMessageById(props.currentId);
         }
         
     },[props.currentId]);
@@ -39,15 +40,17 @@ export const MessagesForm = (props)=>{
 
     //MANEGE FORM
     //SEE DE EVENT INFORMATION
-    const handlesSubmit = e => {
+    const handlesSubmit = (e) => {
         //e.preventDefault ELIMINATE REFRESHING PAGE
         e.preventDefault();
         //FUNTION SAVE EDIT
         props.addOrEditMessages(values);
-        setValues({...initialStateValues})
+        setValues({...initialStateValues })
     }
 
     return (
+        
+        <div className='container col-sm-6'>
     <form className='card card-body bg-secondary' onSubmit={handlesSubmit}>
         <div className="form-group input-group">
             <div className="input-group-text bg-light">
@@ -69,6 +72,7 @@ export const MessagesForm = (props)=>{
           {props.currentId === ''? 'Enviar': 'Actualizar'}
        </button>
     </form>
+    </div>
     );
 }
 

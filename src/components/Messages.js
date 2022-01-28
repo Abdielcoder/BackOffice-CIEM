@@ -13,7 +13,7 @@ import {toast} from 'react-toastify';
     const [currentId, setCurrentId] =  useState('');
 
     const addOrEditMessages = async (messagesObject) => {
-       //console.log(messagesObject);
+        if(currentId === ''){
        await db.collection('Messages').doc().set(messagesObject);
        toast.warn('Mensaje Enviado',{
            type: 'succes',
@@ -21,6 +21,19 @@ import {toast} from 'react-toastify';
            theme: "dark",
            icon: "🚀"
        });
+        }else{
+            console.log("ESOTY ENTRANDO QUI")
+            console.log(currentId)
+            await  db.collection('Messages').doc(currentId).update(messagesObject);
+            toast.warn('Mensaje Actualizado Satisfactoriamente',{
+                type: 'success',
+                autoClose: 2000,
+                theme: "dark",
+                icon: "💾"
+            });
+            setCurrentId('');
+        }
+      
     }
 
     
@@ -58,7 +71,7 @@ import {toast} from 'react-toastify';
         </div>
         
         {/* CALL DE DATA FROM FIREBASE */}
-        <div className="col-md-12 ">
+        <div className="container col-sm-6">
             {Mismensajes.map(message =>(
                 <div className="card mb-2" key={message.id}>
                     <div className="card-body">
