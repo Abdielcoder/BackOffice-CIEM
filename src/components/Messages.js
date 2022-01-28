@@ -65,15 +65,16 @@ import {toast} from 'react-toastify';
         getMessages();
     },[])
     return (
+        
     <div>
-        <div className="col-md-12 mb-1 d-flex justify-content-between'">
+        <div className=" mb-2 '">
         <MessagesForm {...{addOrEditMessages,currentId,Mismensajes}}/>
         </div>
         
         {/* CALL DE DATA FROM FIREBASE */}
-        <div className="container col-sm-6">
+        <div className="container col-sm-12">
             {Mismensajes.map(message =>(
-                <div className="card mb-2" key={message.id}>
+                <div className="card mb-" key={message.id}>
                     <div className="card-body">
                         <div className='d-flex justify-content-between'>
                         <h6 >{message.asunto}</h6>  
@@ -93,6 +94,7 @@ import {toast} from 'react-toastify';
                
         </div>
     </div>
+   
     )
             }
 export default Messages;

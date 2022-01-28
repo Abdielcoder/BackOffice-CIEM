@@ -4,11 +4,30 @@ import {ToastContainer} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import Messages from './components/Messages';
 import MessagesForm from './components/MessagesForm';
+import 'bootstrap/dist/css/bootstrap.css'
+import {Navbar} from 'react-bootstrap'
 
 function App() {
   return (
-    
-    <div className='container p-4'>
+    <body className='color'>
+      
+   
+    <div className='container col-sm-6'>
+     <Navbar bg="navBackground" variant="dark"
+        sticky="top" expand="sm" collapseOnSelect>
+        <Navbar.Brand>
+          Zona de mensajes
+        </Navbar.Brand>
+
+        <Navbar.Toggle className="coloring" />
+        <Navbar.Collapse>
+          
+        </Navbar.Collapse>
+
+      </Navbar>
+      <div className="content">
+
+      
       <div className='row'>
        
         <Messages/>
@@ -20,8 +39,8 @@ function App() {
      />
 
     </div>
- 
-
+    </div>
+    </body>
   );
 }
 

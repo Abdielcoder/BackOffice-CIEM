@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { db } from '../firebase';
-import {Navbar} from 'react-bootstrap'
+
 
 export const MessagesForm = (props)=>{
     const handleInputState = e => {
@@ -50,7 +50,7 @@ export const MessagesForm = (props)=>{
 
     return (
         
-        <div className='container col-sm-6'>
+        <div className='container col-sm-12'>
     <form className='card card-body bg-secondary' onSubmit={handlesSubmit}>
         <div className="form-group input-group">
             <div className="input-group-text bg-light">
