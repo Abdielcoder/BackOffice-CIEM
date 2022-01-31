@@ -3,6 +3,7 @@ import MessagesForm from './MessagesForm';
 import {db} from '../firebase';
 import {toast} from 'react-toastify';
 
+
  const Messages = ()=>{
     const styleh6 = {
         color: 'white',
@@ -15,6 +16,7 @@ import {toast} from 'react-toastify';
     const addOrEditMessages = async (messagesObject) => {
         if(currentId === ''){
        await db.collection('Messages').doc().set(messagesObject);
+       console.log(messagesObject);
        toast.warn('Mensaje Enviado',{
            type: 'succes',
            autoClose: 2000,

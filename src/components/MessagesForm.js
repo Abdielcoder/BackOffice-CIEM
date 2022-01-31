@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { db } from '../firebase';
-
+import { v4 as uuid } from 'uuid';
+const unique_id = uuid();
 
 export const MessagesForm = (props)=>{
     const handleInputState = e => {
@@ -32,6 +33,7 @@ export const MessagesForm = (props)=>{
 
     const initialStateValues = {
         asunto: '',
+        uuid:unique_id,
         mensaje: ''
     };
 
@@ -52,6 +54,14 @@ export const MessagesForm = (props)=>{
         
         <div className='container col-sm-12'>
     <form className='card card-body bg-secondary' onSubmit={handlesSubmit}>
+    <div className="form-group input-group">
+            <div className="input-group-text bg-light">
+                <i className="material-icons">subject</i>
+            </div>
+        
+        <input type="text" className='form-control' placeholder='Asunto:' name='uuid'
+         onChange={handleInputState} value={values.unique_id}/>
+        </div>
         <div className="form-group input-group">
             <div className="input-group-text bg-light">
                 <i className="material-icons">subject</i>
