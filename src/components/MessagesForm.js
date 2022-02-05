@@ -1,14 +1,29 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect,Component} from 'react';
 import { db } from '../firebase';
 import { v4 as uuid } from 'uuid';
+import axios from 'axios';
+import PersonList from "./query.js";
+
 const unique_id = uuid();
 const date = new Date();
+
+const styles = {
+    fontFamily: "sans-serif",
+    textAlign: "center",
+    marginBottom: "18px"
+  };
+  
+
 console.log(date);
 
+
 const ocultarDiv = {
+
     display: 'none'
   
   };
+
+
 
 export const MessagesForm = (props)=>{
     const handleInputState = e => {
@@ -28,23 +43,32 @@ export const MessagesForm = (props)=>{
         setValues({...doc.data()});
     }
 
+   
+
     useEffect(()=>{
         if(props.currentId === ''){
-            //VALUES EMPTY
+            
+           
             setValues({ ...initialStateValues });
         }else{
             getMessageById(props.currentId);
+           
         }
         
     },[props.currentId]);
-
+    
     const initialStateValues = {
         asunto: '',
         uuid:unique_id,
         fecha:date,
         mensaje: ''
     };
-
+    const driversx = {
+        
+       drivers:[]
+    };
+   
+  const [setValues2] = useState(driversx);
   const [values, setValues] = useState(initialStateValues);
 
 
@@ -57,12 +81,15 @@ export const MessagesForm = (props)=>{
         props.addOrEditMessages(values);
         setValues({...initialStateValues })
     }
-
+   
     return (
         
         <div className='container col-sm-12'>
     <form className='card card-body bg-secondary' onSubmit={handlesSubmit}>
-
+    <div style={styles}>
+    <h2>Please select your fav person {"\u2728"}</h2>
+    <PersonList />
+  </div>
     <div style={ocultarDiv} className="form-group input-group">
             <div className="input-group-text bg-light">
                 <i className="material-icons">subject</i>
